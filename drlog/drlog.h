@@ -14,7 +14,7 @@ namespace drlog {
 #define HOUR
 #define MINUTE
 #define SECOND
-#define TIMESTAMP
+#define TIME
 
 class logger {
   private:
@@ -35,6 +35,8 @@ class logger {
     // logger();
     logger(std::string format);
 
+    void set_format(std::string format);
+
     void set_info_style(std::string style);
     void info(std::string msg);
 
@@ -49,8 +51,6 @@ class logger {
     void log(std::string msg);
     void set_debug_style(std::string style);
     void debug(std::string msg);
-
-    void set_format(std::string format);
 
     // void recovery_format();
     // void recovery_all_style();

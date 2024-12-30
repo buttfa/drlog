@@ -1,13 +1,13 @@
+#include <ctime>
 #include <iostream>
 
 #include "drlog.h"
 
 using namespace std;
-using namespace drlog;
 
 // logger::logger() { this->format = "[{TYPE}]: {MESSAGE}"; }
 
-logger::logger(std::string format) {
+drlog::logger::logger(std::string format) {
     this->format = format;
 
     this->info_style = "\033[37mInfo\033[0m";
@@ -20,17 +20,41 @@ logger::logger(std::string format) {
     this->debug_style = "\033[35mDebug\033[0m";
 }
 
+static void replace_word(std::string& str, std::string from, std::string to) {
+    size_t start_pos = str.find(from);
+    if (start_pos == std::string::npos)
+        return;
+    str.replace(start_pos, from.length(), to);
+}
+
 std::string drlog::logger::replace(std::string type, std::string msg) {
-    int pos = 0;
     string format_bak = this->format;
 
     // If the type is found, replace it.
-    if ((pos = format_bak.find("{TYPE}")) != std::string::npos)
-        format_bak.replace(pos, string("{TYPE}").length(), type);
+    replace_word(format_bak, string("{TYPE}"), type);
 
     // If the message is found, replace it.
-    if ((pos = format_bak.find("{MESSAGE}")) != std::string::npos)
-        format_bak.replace(pos, string("{MESSAGE}").length(), msg);
+    replace_word(format_bak, string("{MESSAGE}"), msg);
+
+    // Get the current time.
+    std::time_t currentTime = std::time(nullptr);
+    std::tm* localTime = std::localtime(&currentTime);
+    replace_word(format_bak, string("{YEAR}"),
+                 to_string(localTime->tm_year + 1900));
+    replace_word(format_bak, string("{MONTH}"),
+                 to_string(localTime->tm_mon + 1));
+    replace_word(format_bak, string("{DAY}"), to_string(localTime->tm_mday));
+    replace_word(format_bak, string("{HOUR}"), to_string(localTime->tm_hour));
+    replace_word(format_bak, string("{MINUTE}"), to_string(localTime->tm_min));
+    replace_word(format_bak, string("{SECOND}"), to_string(localTime->tm_sec));
+
+    replace_word(format_bak, string("{TIME}"),
+                 to_string(localTime->tm_year + 1900) + "/" +
+                     to_string(localTime->tm_mon + 1) + "/" +
+                     to_string(localTime->tm_mday) + " " +
+                     to_string(localTime->tm_hour) + ":" +
+                     to_string(localTime->tm_min) + ":" +
+                     to_string(localTime->tm_sec));
 
     return format_bak;
 }
