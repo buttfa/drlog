@@ -5,16 +5,26 @@
 
 namespace drlog {
 
-#define TYPE
-#define MESSAGE
+// class msg_info {
+//   public:
+//     std::string type;
+//     std::string file;
+//     std::string line;
+//     std::string function;
+//     std::string pretty_function;
 
-#define YEAR
-#define MONTH
-#define DAY
-#define HOUR
-#define MINUTE
-#define SECOND
-#define TIME
+//     msg_info(std::string file, std::string line, std::string function,
+//              std::string pretty_function) {
+//         this->file = file;
+//         this->line = line;
+//         this->function = function;
+//         this->pretty_function = pretty_function;
+//     };
+// };
+
+// #define DR_INFO                                                                \
+//     drlog::msg_info(__FILE__, to_string(__LINE__), __FUNCTION__,               \
+//                     __PRETTY_FUNCTION__)
 
 class logger {
   private:
@@ -32,13 +42,14 @@ class logger {
     std::string replace(std::string type, std::string msg);
 
   public:
-    // logger();
+    logger();
     logger(std::string format);
 
     void set_format(std::string format);
 
     void set_info_style(std::string style);
     void info(std::string msg);
+    // void info(std::string msg, drlog::msg_info info);
 
     void set_note_style(std::string style);
     void note(std::string msg);

@@ -3,4 +3,4 @@ run: compile
 	rm main
 
 compile:
-	g++ -o main main.cpp ../../drlog/drlog.cpp -I../../
+	g++ -o main main.cpp ../../drlog/drlog.cpp -I../../ -W -Wall

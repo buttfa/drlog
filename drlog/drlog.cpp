@@ -5,7 +5,18 @@
 
 using namespace std;
 
-// logger::logger() { this->format = "[{TYPE}]: {MESSAGE}"; }
+drlog::logger::logger() {
+    this->format = "{TIME} [{TYPE}]: {MESSAGE}";
+
+    this->info_style = "\033[37mInfo\033[0m";
+
+    this->note_style = "\033[32mNote\033[0m";
+    this->warn_style = "\033[33mWarn\033[0m";
+    this->error_style = "\033[31mError\033[0m";
+
+    this->log_style = "\033[34mLog\033[0m";
+    this->debug_style = "\033[35mDebug\033[0m";
+}
 
 drlog::logger::logger(std::string format) {
     this->format = format;
@@ -66,6 +77,8 @@ void drlog::logger::set_info_style(std::string style) {
 void drlog::logger::info(std::string msg) {
     cout << this->replace(this->info_style, msg) << endl;
 }
+
+// void drlog::logger::info(std::string msg, drlog::msg_info info) {}
 
 void drlog::logger::set_note_style(std::string style) {
     this->note_style = style;

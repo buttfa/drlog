@@ -3,7 +3,8 @@
 #include "drlog/drlog.h"
 
 int main() {
-    drlog::logger lg("[{TYPE}]: {MESSAGE}");
+    drlog::logger lg = drlog::logger();
+    // drlog::logger lg("{TIME} [{TYPE}]: {MESSAGE}");
 
     lg.info("This is an info!");
 
