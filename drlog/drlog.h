@@ -5,6 +5,14 @@
 
 namespace drlog {
 
+#ifndef DR_NO_DEBUG
+#define DR_DEBUG(lg) lg
+#else
+#define DR_DEBUG(lg)                                                           \
+    do {                                                                       \
+    } while (false)
+#endif
+
 class msg_info {
   public:
     std::string type;
@@ -14,22 +22,10 @@ class msg_info {
     std::string function;
     std::string pretty_function;
 
-    msg_info(std::string type, std::string msg) {
-        this->type = type;
-        this->msg = msg;
-        this->file = "";
-        this->line = "";
-        this->function = "";
-        this->pretty_function = "";
-    };
+    msg_info(std::string type, std::string msg);
 
     msg_info(std::string file, std::string line, std::string function,
-             std::string pretty_function) {
-        this->file = file;
-        this->line = line;
-        this->function = function;
-        this->pretty_function = pretty_function;
-    };
+             std::string pretty_function);
 };
 
 #define DR_INFO                                                                \

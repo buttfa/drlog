@@ -5,6 +5,23 @@
 
 using namespace std;
 
+drlog::msg_info::msg_info(std::string type, std::string msg) {
+    this->type = type;
+    this->msg = msg;
+    this->file = "";
+    this->line = "";
+    this->function = "";
+    this->pretty_function = "";
+};
+
+drlog::msg_info::msg_info(std::string file, std::string line,
+                          std::string function, std::string pretty_function) {
+    this->file = file;
+    this->line = line;
+    this->function = function;
+    this->pretty_function = pretty_function;
+};
+
 drlog::logger::logger() {
     this->format = "{TIME} [{TYPE}]: {MESSAGE}";
 

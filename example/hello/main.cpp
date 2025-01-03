@@ -6,6 +6,7 @@ using namespace std;
 
 int main() {
     cout << "*****************************************************" << endl;
+
     drlog::logger lg1 = drlog::logger();
     lg1.info("This is an info!");
     lg1.note("This is a note!");
@@ -24,6 +25,16 @@ int main() {
     lg2.error("This is an error!", DR_INFO);
     lg2.log("This is a log!", DR_INFO);
     lg2.debug("This is a debug!", DR_INFO);
+
+    cout << "*****************************************************" << endl;
+
+    drlog::logger lg3 = drlog::logger();
+    DR_DEBUG(lg3.info("This is an info!"));
+    DR_DEBUG(lg3.note("This is a note!"));
+    DR_DEBUG(lg3.warn("This is a warn!"));
+    DR_DEBUG(lg3.error("This is an error!"));
+    DR_DEBUG(lg3.log("This is a log!"));
+    DR_DEBUG(lg3.debug("This is a debug!"));
 
     return 0;
 }
