@@ -38,14 +38,19 @@ static void replace_word(std::string& str, std::string from, std::string to) {
     str.replace(start_pos, from.length(), to);
 }
 
-std::string drlog::logger::replace(std::string type, std::string msg) {
+std::string drlog::logger::replace(drlog::msg_info info) {
     string format_bak = this->format;
 
     // If the type is found, replace it.
-    replace_word(format_bak, string("{TYPE}"), type);
+    replace_word(format_bak, string("{TYPE}"), info.type);
 
     // If the message is found, replace it.
-    replace_word(format_bak, string("{MESSAGE}"), msg);
+    replace_word(format_bak, string("{MESSAGE}"), info.msg);
+
+    replace_word(format_bak, string("{FILE}"), info.file);
+    replace_word(format_bak, string("{LINE}"), info.line);
+    replace_word(format_bak, string("{FUNCTION}"), info.function);
+    replace_word(format_bak, string("{PRETTY_FUNCTION}"), info.pretty_function);
 
     // Get the current time.
     std::time_t currentTime = std::time(nullptr);
@@ -75,17 +80,29 @@ void drlog::logger::set_info_style(std::string style) {
 }
 
 void drlog::logger::info(std::string msg) {
-    cout << this->replace(this->info_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->info_style, msg);
+    cout << this->replace(info) << endl;
 }
 
-// void drlog::logger::info(std::string msg, drlog::msg_info info) {}
+void drlog::logger::info(std::string msg, drlog::msg_info info) {
+    info.type = this->info_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
+}
 
 void drlog::logger::set_note_style(std::string style) {
     this->note_style = style;
 }
 
 void drlog::logger::note(std::string msg) {
-    cout << this->replace(this->note_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->note_style, msg);
+    cout << this->replace(info) << endl;
+}
+
+void drlog::logger::note(std::string msg, drlog::msg_info info) {
+    info.type = this->note_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
 }
 
 void drlog::logger::set_warn_style(std::string style) {
@@ -93,7 +110,14 @@ void drlog::logger::set_warn_style(std::string style) {
 }
 
 void drlog::logger::warn(std::string msg) {
-    cout << this->replace(this->warn_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->warn_style, msg);
+    cout << this->replace(info) << endl;
+}
+
+void drlog::logger::warn(std::string msg, drlog::msg_info info) {
+    info.type = this->warn_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
 }
 
 void drlog::logger::set_error_style(std::string style) {
@@ -101,7 +125,14 @@ void drlog::logger::set_error_style(std::string style) {
 }
 
 void drlog::logger::error(std::string msg) {
-    cout << this->replace(this->error_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->error_style, msg);
+    cout << this->replace(info) << endl;
+}
+
+void drlog::logger::error(std::string msg, drlog::msg_info info) {
+    info.type = this->error_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
 }
 
 void drlog::logger::set_log_style(std::string style) {
@@ -109,7 +140,14 @@ void drlog::logger::set_log_style(std::string style) {
 }
 
 void drlog::logger::log(std::string msg) {
-    cout << this->replace(this->log_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->log_style, msg);
+    cout << this->replace(info) << endl;
+}
+
+void drlog::logger::log(std::string msg, drlog::msg_info info) {
+    info.type = this->log_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
 }
 
 void drlog::logger::set_debug_style(std::string style) {
@@ -117,7 +155,14 @@ void drlog::logger::set_debug_style(std::string style) {
 }
 
 void drlog::logger::debug(std::string msg) {
-    cout << this->replace(this->debug_style, msg) << endl;
+    drlog::msg_info info = drlog::msg_info(this->debug_style, msg);
+    cout << this->replace(info) << endl;
+}
+
+void drlog::logger::debug(std::string msg, drlog::msg_info info) {
+    info.type = this->debug_style;
+    info.msg = msg;
+    cout << this->replace(info) << endl;
 }
 
 void drlog::logger::set_format(std::string format) { this->format = format; }

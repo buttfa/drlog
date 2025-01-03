@@ -2,18 +2,28 @@
 
 #include "drlog/drlog.h"
 
+using namespace std;
+
 int main() {
-    drlog::logger lg = drlog::logger();
-    // drlog::logger lg("{TIME} [{TYPE}]: {MESSAGE}");
+    cout << "*****************************************************" << endl;
+    drlog::logger lg1 = drlog::logger();
+    lg1.info("This is an info!");
+    lg1.note("This is a note!");
+    lg1.warn("This is a warn!");
+    lg1.error("This is an error!");
+    lg1.log("This is a log!");
+    lg1.debug("This is a debug!");
 
-    lg.info("This is an info!");
+    cout << "*****************************************************" << endl;
 
-    lg.note("This is a note!");
-    lg.warn("This is a warn!");
-    lg.error("This is an error!");
-
-    lg.log("This is a log!");
-    lg.debug("This is a debug!");
+    drlog::logger lg2("[{TYPE}]: {MESSAGE} || {FILE}:{LINE} || {FUNCTION} || "
+                      "{PRETTY_FUNCTION}");
+    lg2.info("This is an info!", DR_INFO);
+    lg2.note("This is a note!", DR_INFO);
+    lg2.warn("This is a warn!", DR_INFO);
+    lg2.error("This is an error!", DR_INFO);
+    lg2.log("This is a log!", DR_INFO);
+    lg2.debug("This is a debug!", DR_INFO);
 
     return 0;
 }
