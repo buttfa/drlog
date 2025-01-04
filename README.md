@@ -16,7 +16,7 @@ Drlog is a simple log library for c++.
 Please add the drlog.cpp and drlog.h files from the drlog folder to the project.
 
 #### 2. Quick Start
-1. The simplest way to use
+1. The simplest way to use<br>
 The following is a simple tutorial of using drlog.
 ```cpp
 #include "drlog.h"
@@ -38,7 +38,7 @@ int main() {
 Result:
 ![alt text](image/output_of_tutorial_1.png)
 
-2. Custom format
+2. Custom format<br>
 The following is a tutorial of using drlog with a custom format.
 ```cpp
 #include "drlog.h"
@@ -78,8 +78,8 @@ You can use the following variables in custom formats.
 |{PRETTY_FUNCTION}|Function name with parameters|Need to enable file information.|
 
 
-3. Enable file information
-The following is a tutorial of using drlog with file information enabled.
+3. Enable file information<br>
+The following is a tutorial of using drlog with file information enabled.<br>
 Just pass a DR_INFO macro as an additional parameter on top of the original one.
 ```cpp
 #include "drlog.h"
@@ -101,8 +101,8 @@ int main() {
 Result:
 ![alt text](image/output_of_tutorial_3.png)
 
-4. Enable DEBUG mode
-The following is a tutorial of using drlog with DEBUG mode enabled.
+4. Enable DEBUG mode<br>
+The following is a tutorial of using drlog with DEBUG mode enabled.<br>
 When the target information needs to be printed during the development phase but not during the release phase, simply wrap the target with the DR_DEBUG macro.
 ```cpp
 #include "drlog.h"
