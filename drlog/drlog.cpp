@@ -23,14 +23,14 @@ drlog::msg_info::msg_info(std::string file, std::string line,
 };
 
 drlog::logger::logger() {
-    this->recovery_format();
-    this->recovery_all_type_style();
+    this->recover_format();
+    this->recover_all_type_style();
 }
 
 drlog::logger::logger(std::string format) {
     this->format = format;
 
-    this->recovery_all_type_style();
+    this->recover_all_type_style();
 }
 
 static void replace_word(std::string& str, std::string from, std::string to) {
@@ -169,11 +169,9 @@ void drlog::logger::debug(std::string msg, drlog::msg_info info) {
 
 void drlog::logger::set_format(std::string format) { this->format = format; }
 
-void drlog::logger::recovery_format() {
-    this->format = "{TIME} [{TYPE}]: {MESSAGE}";
-}
+void drlog::logger::recover_format() { this->format = "[{TYPE}]: {MESSAGE}"; }
 
-void drlog::logger::recovery_all_type_style() {
+void drlog::logger::recover_all_type_style() {
     this->info_style = "\033[37mInfo\033[0m";
 
     this->note_style = "\033[32mNote\033[0m";
