@@ -78,8 +78,8 @@ class logger {
     void set_log_style(std::string style);
     void set_debug_style(std::string style);
 
-    // void recovery_format();
-    // void recovery_all_type_style();
+    void recovery_format();
+    void recovery_all_type_style();
 };
 } // namespace drlog
 
