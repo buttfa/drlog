@@ -35,7 +35,7 @@ int main() {
     return 0;
 }
 ```
-Result:
+Result:<br>
 ![alt text](image/output_of_tutorial_1.png)
 
 2. Custom format<br>
@@ -57,7 +57,7 @@ int main() {
     return 0;
 }
 ```
-Result:
+Result:<br>
 ![alt text](image/output_of_tutorial_2.png)
 
 You can use the following variables in custom formats.
@@ -98,7 +98,7 @@ int main() {
     return 0;
 }
 ```
-Result:
+Result:<br>
 ![alt text](image/output_of_tutorial_3.png)
 
 4. Enable DEBUG mode<br>
@@ -136,3 +136,54 @@ Result:
 ![alt text](image/output_of_tutorial_4_1.png)
 - Release(Passed DR_NO_DEBUG macro):
 ![alt text](image/output_of_tutorial_4_2.png)
+
+5. Set output format and type style<br>
+The following is a tutorial on using drlog to set output format and type styles.
+```cpp
+#include "drlog.h"
+#include <iostream>
+using namespace std;
+
+int main() {
+    drlog::logger lg;
+    lg.info("This is an info!");
+    lg.note("This is a note!");
+    lg.warn("This is a warn!");
+    lg.error("This is an error!");
+    lg.log("This is a log!");
+    lg.debug("This is a debug!");
+
+    cout << "***********************************" << endl;
+
+    lg.set_format("{TYPE}: {MESSAGE}");
+    lg.set_debug_style("DEBUG");
+    lg.set_info_style("INFO");
+    lg.set_warn_style("WARN");
+    lg.set_error_style("ERROR");
+    lg.set_note_style("NOTE");
+    lg.set_log_style("LOG");
+
+    lg.info("This is an info!");
+    lg.note("This is a note!");
+    lg.warn("This is a warn!");
+    lg.error("This is an error!");
+    lg.log("This is a log!");
+    lg.debug("This is a debug!");
+
+    cout << "***********************************" << endl;
+
+    lg.recover_format();
+    lg.recover_all_type_style();
+
+    lg.info("This is an info!");
+    lg.note("This is a note!");
+    lg.warn("This is a warn!");
+    lg.error("This is an error!");
+    lg.log("This is a log!");
+    lg.debug("This is a debug!");
+
+    return 0;
+}
+```
+Result:<br>
+![alt text](image/output_of_tutorial_5.png)
