@@ -169,7 +169,9 @@ void drlog::logger::debug(std::string msg, drlog::msg_info info) {
 
 void drlog::logger::set_format(std::string format) { this->format = format; }
 
-void drlog::logger::recover_format() { this->format = "[{TYPE}]: {MESSAGE}"; }
+void drlog::logger::recover_format() {
+    this->format = "{TIME} [{TYPE}]: {MESSAGE}";
+}
 
 void drlog::logger::recover_all_type_style() {
     this->info_style = "\033[37mInfo\033[0m";
