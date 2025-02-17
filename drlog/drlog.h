@@ -35,6 +35,7 @@ class msg_info {
 class logger {
   private:
     std::string format;
+    void (*print)(std::string);
 
     std::string info_style;
 
@@ -52,6 +53,7 @@ class logger {
     logger(std::string format);
 
     void set_format(std::string format);
+    void set_print(void (*print)(std::string));
 
     void info(std::string msg);
     void info(std::string msg, drlog::msg_info info);
@@ -79,6 +81,7 @@ class logger {
     void set_debug_style(std::string style);
 
     void recover_format();
+    void recover_print();
     void recover_all_type_style();
 };
 } // namespace drlog

@@ -24,12 +24,13 @@ drlog::msg_info::msg_info(std::string file, std::string line,
 
 drlog::logger::logger() {
     this->recover_format();
+    this->recover_print();
     this->recover_all_type_style();
 }
 
 drlog::logger::logger(std::string format) {
     this->format = format;
-
+    this->recover_print();
     this->recover_all_type_style();
 }
 
@@ -83,13 +84,13 @@ void drlog::logger::set_info_style(std::string style) {
 
 void drlog::logger::info(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->info_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::info(std::string msg, drlog::msg_info info) {
     info.type = this->info_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_note_style(std::string style) {
@@ -98,13 +99,13 @@ void drlog::logger::set_note_style(std::string style) {
 
 void drlog::logger::note(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->note_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::note(std::string msg, drlog::msg_info info) {
     info.type = this->note_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_warn_style(std::string style) {
@@ -113,13 +114,13 @@ void drlog::logger::set_warn_style(std::string style) {
 
 void drlog::logger::warn(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->warn_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::warn(std::string msg, drlog::msg_info info) {
     info.type = this->warn_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_error_style(std::string style) {
@@ -128,13 +129,13 @@ void drlog::logger::set_error_style(std::string style) {
 
 void drlog::logger::error(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->error_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::error(std::string msg, drlog::msg_info info) {
     info.type = this->error_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_log_style(std::string style) {
@@ -143,13 +144,13 @@ void drlog::logger::set_log_style(std::string style) {
 
 void drlog::logger::log(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->log_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::log(std::string msg, drlog::msg_info info) {
     info.type = this->log_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_debug_style(std::string style) {
@@ -158,20 +159,28 @@ void drlog::logger::set_debug_style(std::string style) {
 
 void drlog::logger::debug(std::string msg) {
     drlog::msg_info info = drlog::msg_info(this->debug_style, msg);
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::debug(std::string msg, drlog::msg_info info) {
     info.type = this->debug_style;
     info.msg = msg;
-    cout << this->replace(info) << endl;
+    this->print(this->replace(info));
 }
 
 void drlog::logger::set_format(std::string format) { this->format = format; }
 
+void drlog::logger::set_print(void (*print)(std::string)) {
+    this->print = print;
+}
+
 void drlog::logger::recover_format() {
     this->format = "{TIME} [{TYPE}]: {MESSAGE}";
 }
+
+static void defeault_print(std::string str) { cout << str << endl; }
+
+void drlog::logger::recover_print() { this->print = defeault_print; }
 
 void drlog::logger::recover_all_type_style() {
     this->info_style = "\033[37mInfo\033[0m";
