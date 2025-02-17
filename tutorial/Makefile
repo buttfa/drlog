@@ -34,3 +34,8 @@ tutorial_5:
 	g++ -o tutorial_5 tutorial_5.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
 	./tutorial_5
 	rm tutorial_5
+
+tutorial_6:
+	g++ -o tutorial_6 tutorial_6.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	./tutorial_6
+	rm tutorial_6
