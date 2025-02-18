@@ -4,19 +4,20 @@ all:
 	make tutorial_3
 	make tutorial_4
 	make tutorial_5
+	make tutorial_6
 
 tutorial_1:
-	g++ -o tutorial_1 tutorial_1.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	g++ -o tutorial_1 tutorial_1.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11 -W -Wall
 	./tutorial_1
 	rm tutorial_1
 
 tutorial_2:
-	g++ -o tutorial_2 tutorial_2.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	g++ -o tutorial_2 tutorial_2.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11 -W -Wall
 	./tutorial_2
 	rm tutorial_2
 
 tutorial_3:
-	g++ -o tutorial_3 tutorial_3.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	g++ -o tutorial_3 tutorial_3.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11 -W -Wall
 	./tutorial_3
 	rm tutorial_3
 
@@ -31,11 +32,11 @@ tutorial_4:
 	rm tutorial_4
 
 tutorial_5:
-	g++ -o tutorial_5 tutorial_5.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	g++ -o tutorial_5 tutorial_5.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11 -W -Wall
 	./tutorial_5
 	rm tutorial_5
 
 tutorial_6:
-	g++ -o tutorial_6 tutorial_6.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11
+	g++ -o tutorial_6 tutorial_6.cpp ../drlog/drlog.cpp -I ../drlog/ -std=c++11 -W -Wall
 	./tutorial_6
 	rm tutorial_6
